@@ -14,8 +14,8 @@ android {
         instrumentTest.setRoot('tests')
     }
     defaultConfig {
-        versionCode 2
-        versionName '0.9.5'
+        versionCode 3
+        versionName '0.9.9'
     }
     productFlavors {
     }

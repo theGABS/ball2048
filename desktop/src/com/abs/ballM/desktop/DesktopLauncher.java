@@ -39,6 +39,10 @@ public class DesktopLauncher implements  MyGame.RequestHandler{
         // for desktop does not need
     }
 
+    @Override public void shareRecord(int score){
+        // for desktop does not need
+    }
+
     @Override
     public void showAds(){
         // for desktop no advertising

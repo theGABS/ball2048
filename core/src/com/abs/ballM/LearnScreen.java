@@ -29,8 +29,8 @@ public class LearnScreen extends AbstractScreen {
     //private Stage stage = new Stage();
     private Table table = new Table();
     private I18NBundle myBundle;
-    private Texture background = new Texture("fon22.png");
     private Texture howPlayTexture = new Texture("how_play.png");
+    private Texture whiteGradient = new Texture("white_gradient.png");
 //        private Skin skin = new Skin(Gdx.files.internal("skin/skin.json"),
 //                new TextureAtlas(Gdx.files.internal("skin/pack.atlas")));
 
@@ -46,7 +46,6 @@ public class LearnScreen extends AbstractScreen {
         batch = new SpriteBatch();
         fullCamera = new OrthographicCamera();
         myBundle = I18NBundle.createBundle(Gdx.files.internal("i18n/MyBundle"));
-        String[] helloText = {myBundle.get("helloText1") , myBundle.get("helloText2") , myBundle.get("helloText3")};
 
 
 //        BitmapFont font = MyGame.fontGeneration(Gdx.graphics.getWidth() / 30);
@@ -65,7 +64,7 @@ public class LearnScreen extends AbstractScreen {
 //        Label label3 = new Label(helloText[2], skin);
 
         stage.clear();
-        buttonPlay = new TextButton("Play", skin);
+        buttonPlay = new TextButton(game.myBundle.get("play"), skin);
         //buttonPlay.setPosition(100, 100);
         buttonPlay.setWidth(Gdx.graphics.getWidth());
         buttonPlay.setHeight(Gdx.graphics.getWidth() / 3.7f);
@@ -101,7 +100,9 @@ public class LearnScreen extends AbstractScreen {
 
 
         stage.getBatch().begin();
-        stage.getBatch().draw(background, 0, 0, width, height);
+        stage.getBatch().setColor(new Color(0.5f, 0.5f, 0.5f, 1));
+        stage.getBatch().draw(game.background, 0, 0, width, height);
+        stage.getBatch().setColor(Color.WHITE);
         stage.getBatch().end();
 
         //super.render(delta);
@@ -110,6 +111,7 @@ public class LearnScreen extends AbstractScreen {
         stage.draw();
 
         batch.begin();
+        //batch.draw(whiteGradient,0,height*0.4f,width,height*0.6f);
         float padding = width * 0.1f;
         float bottom = height - font.drawWrapped(batch, myBundle.get("howPlay"), width * 0.02f, height * 0.98f, width * 0.96f).height - (width / 1.8f) - padding;
         batch.draw(howPlayTexture, 0, bottom, width, width / 1.8f);
@@ -129,7 +131,7 @@ public class LearnScreen extends AbstractScreen {
         fullCamera.update();
         batch.setProjectionMatrix(fullCamera.combined);
         font = fontGeneration(width/25);
-        font.setColor(Color.BLACK);
+        //font.setColor(Color.BLACK);
     }
 
 }

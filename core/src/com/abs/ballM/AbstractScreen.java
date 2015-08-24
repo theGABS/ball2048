@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -35,6 +36,11 @@ public abstract class AbstractScreen implements Screen {
         BitmapFont font;
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("ClearSansBold.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        parameter.borderColor = Color.BLACK;
+        parameter.shadowColor = new Color(0,0,0,1);
+//        parameter.shadowOffsetY = 1;
+//        parameter.shadowOffsetX = 1;
+        parameter.borderWidth = 1;
         parameter.size = size;
         parameter.characters = RUSSIAN_CHARACTERS + FONT_CHARACTERS;
         font = generator.generateFont(parameter);
@@ -97,7 +103,6 @@ public abstract class AbstractScreen implements Screen {
 
         //InputProcessor inputProcessorOne = stage;
         //InputProcessor inputProcessorTwo = new CustomInputProcessorTwo();
-
         inputMultiplexer.addProcessor(stage);
         Gdx.input.setInputProcessor(inputMultiplexer);
     }

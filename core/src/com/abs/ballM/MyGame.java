@@ -44,7 +44,7 @@ public class MyGame extends Game implements ApplicationListener {
     OrthographicCamera camera, fullCamera;
     MenuScreen         menuScreen;
     GameScreen         gameScreen;
-    I18NBundle myBundle;
+    public I18NBundle myBundle;
     Texture background;
     Texture blackGradient;
     int                frame = 0;
@@ -58,6 +58,7 @@ public class MyGame extends Game implements ApplicationListener {
         void loadAds();
         void showAds();
         void share();
+        void shareRecord(int score);
     }
 
     public interface ConfirmInterface {
@@ -115,7 +116,7 @@ public class MyGame extends Game implements ApplicationListener {
     public void create() {
         AbstractScreen.game = this;
         myBundle =       I18NBundle.createBundle(Gdx.files.internal("i18n/MyBundle"));
-        background =     new Texture("fon22.png");
+        background =     new Texture("fon24.jpg");
         blackGradient =  new Texture("black_gradient.png");
         camera =         new OrthographicCamera();
         fullCamera =     new OrthographicCamera();
@@ -131,11 +132,15 @@ public class MyGame extends Game implements ApplicationListener {
         AbstractScreen.skin.load(Gdx.files.internal("skin/skin.json"));
 
 
-        menuScreen =     new MenuScreen();
-        setScreen(menuScreen);
+        //menuScreen =     ;
+        setScreen(new MenuScreen());
 
         clickSound = Gdx.audio.newSound(Gdx.files.internal("click.mp3"));
-        goodSound = Gdx.audio.newSound(Gdx.files.internal("good.mp3"));
+        goodSound = Gdx.audio.newSound(Gdx.files.internal("good2.mp3"));
+
+        Gdx.input.setCatchBackKey(true);
+
+
 
 
     }

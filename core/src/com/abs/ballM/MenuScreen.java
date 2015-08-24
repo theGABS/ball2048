@@ -19,19 +19,13 @@ import com.badlogic.gdx.utils.viewport.ExtendViewport;
  */
 class MenuScreen extends AbstractScreen {
 
-    //private MyGame game;
     float aspectRatio;
     float colorValue = 0;
     float time;
-    //MyGame game;
-    String howStart = game.myBundle.get("howStart");
-    String[] helloText = {game.myBundle.get("helloText1"), game.myBundle.get("helloText2"), game.myBundle.get("helloText3")};
 
-    private Stage stage = new Stage();
+    //private Stage stage = new Stage();
     private Table table = new Table();
     private TextButton buttonPlay, buttonHowPlay, buttonShare, buttonScore;
-//        private Skin skin = new Skin(Gdx.files.internal("skin/skin.json"),
-//                new TextureAtlas(Gdx.files.internal("skin/pack.atlas")));
 
     String highScore;
 
@@ -50,20 +44,15 @@ class MenuScreen extends AbstractScreen {
         width = game.fullCamera.viewportWidth;
         height = game.fullCamera.viewportHeight;
 
-        highScore = "highScore: " + MyGame.prefs.getInteger("highScore");
+        highScore = game.myBundle.get("HighScore") + MyGame.prefs.getInteger("highScore");
 
-//        BitmapFont font = fontGeneration(Gdx.graphics.getWidth() / 13);
-//        skin.addRegions(new TextureAtlas(Gdx.files.internal("skin/pack.atlas")));
-//        skin.add("font", font, font.getClass());
-//        skin.load(Gdx.files.internal("skin/skin.json"));
-
+        stage.clear();
         table.setFillParent(true);
         table.setDebug(true);
 
-        buttonPlay = new TextButton("Play", skin);
+        buttonPlay = new TextButton(game.myBundle.get("play"), skin);
 
         aspectRatio = buttonPlay.getStyle().up.getMinWidth() / buttonPlay.getStyle().up.getMinHeight();
-        //buttonPlay.setWidth(100);
         buttonPlay.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -71,7 +60,7 @@ class MenuScreen extends AbstractScreen {
                 game.setScreen(new GameScreen());
             }
         });
-        buttonHowPlay = new TextButton("How play", skin);
+        buttonHowPlay = new TextButton(game.myBundle.get("howPlayButton"), skin);
         buttonHowPlay.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -79,7 +68,7 @@ class MenuScreen extends AbstractScreen {
                 game.setScreen(new LearnScreen());
             }
         });
-        buttonShare = new TextButton("Share", skin);
+        buttonShare = new TextButton(game.myBundle.get("share"), skin);
         buttonShare.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -88,6 +77,7 @@ class MenuScreen extends AbstractScreen {
             }
         });
         buttonScore = new TextButton(highScore, skin);
+        //buttonScore.addLis  //TODO addListener and recordScreen
 
 //            table.add(buttonPlay).width(width * 0.8f).height(width * 0.8f/aspectRatio).row();
 //            table.add(buttonHowPlay).width(width * 0.8f).height(width * 0.8f / aspectRatio).row();
@@ -117,40 +107,17 @@ class MenuScreen extends AbstractScreen {
 
     @Override
     public void render(float dt) {
-        Gdx.input.setInputProcessor(stage);
+        //Gdx.input.setInputProcessor(stage);
         if (game.frame == 5) {
-            game.loadHard();
+            game.loadHard(); // TODO
         }
         game.frame++;
         //if(!startRender){ game.loadHard(); startRender = true;  }
         colorValue = (float) ((1 + Math.sin((time += dt) * 1.6f)) * 0.5f);
 
-
         batch.setProjectionMatrix(game.fullCamera.combined);
         batch.begin();
         batch.draw(game.background, 0, 0, game.fullCamera.viewportWidth, game.fullCamera.viewportHeight);
-
-
-        //TODO in new libGDX supported font-shadow
-//            for(int j = 0; j < 2; j++) {
-//                float acm = fullCamera.viewportHeight*0.98f;
-//                float sm = 2*(1-j);
-//                font.setColor(new Color(j, j, j, 1));
-//
-//                for (int i = 0; i < 2; i++) {
-//                    font.drawWrapped(batch, helloText[i], fullCamera.viewportWidth * 0.02f - sm , acm - sm, fullCamera.viewportWidth * 0.96f);
-//                    acm -= font.getWrappedBounds(helloText[i], fullCamera.viewportWidth * 0.96f).height + 35;
-//                    //batch.draw(line, fullCamera.viewportWidth * 0.02f, acm + 10, fullCamera.viewportWidth * 0.96f, 15);
-//                }
-//            }
-
-
-//            font.setColor(colorValue, colorValue, colorValue, 1);
-//            font.draw(batch, howStart, fullCamera.viewportWidth / 2 - font.getBounds(howStart).width / 2,
-//                    fullCamera.viewportHeight*0.12f + font.getBounds(howStart).height / 2);
-//
-//            String highScore =  "highScore: " + prefs.getInteger("highScore");
-//            font.draw(batch, highScore, fullCamera.viewportWidth / 2 - font.getBounds(highScore).width / 2, 40);
 
         batch.end();
 
@@ -158,10 +125,6 @@ class MenuScreen extends AbstractScreen {
         stage.act(dt);
         stage.draw();
 
-//            if (Gdx.input.justTouched() && frame > 5) {
-//                clickSound.play();
-//                //game.setScreen(game.gameScreen);
-//            }
     }
 
 

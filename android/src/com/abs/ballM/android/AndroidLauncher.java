@@ -41,6 +41,7 @@ public class AndroidLauncher extends AndroidApplication implements MyGame.Reques
 	InterstitialAd interstitial;
 	AdRequest.Builder adRequestBuilder;
 	View gameView;
+	MyGame game;
 
 
 
@@ -60,7 +61,8 @@ public class AndroidLauncher extends AndroidApplication implements MyGame.Reques
 		config.g = 8;
 		config.b = 8;
 		config.a = 8;
-		gameView = initializeForView(new MyGame(this), config);
+		game = new MyGame(this);
+		gameView = initializeForView(game, config);
 
 
 
@@ -124,7 +126,16 @@ public class AndroidLauncher extends AndroidApplication implements MyGame.Reques
 	public void share(){
 		Intent sharingIntent = new Intent(Intent.ACTION_SEND);
 		sharingIntent.setType("text/plain");
-		sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, "Try cool game - balls 2048 https://play.google.com/store/apps/details?id=com.abs.ballM.android"); // todo ADD LINK
+		sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, game.myBundle.get("shareText") + " https://play.google.com/store/apps/details?id=com.abs.ballM.android"); // MAYBE USE shortLink ???
+		sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Subject");
+		startActivity(Intent.createChooser(sharingIntent, "Share using"));
+	}
+
+	@Override
+	public void shareRecord(int score){
+		Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+		sharingIntent.setType("text/plain");
+		sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, game.myBundle.get("shareTextRecord") + score + game.myBundle.get("point") + " https://play.google.com/store/apps/details?id=com.abs.ballM.android");
 		sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Subject");
 		startActivity(Intent.createChooser(sharingIntent, "Share using"));
 	}
