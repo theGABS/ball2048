@@ -764,8 +764,8 @@ class GameScreen extends AbstractScreen{
             //}
 
         }
-
-        world.step(dt, BOX_VELOCITY_ITERATIONS, BOX_POSITION_ITERATIONS);
+        float carefulDt = Math.min(dt,0.02f); // if the function argument(world.step(dt, ..)) be a big - balls fall through
+        world.step(carefulDt, BOX_VELOCITY_ITERATIONS, BOX_POSITION_ITERATIONS);
     }
 
     @Override

@@ -14,6 +14,7 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.I18NBundle;
 
+import java.util.Locale;
 import java.util.Random;
 
 
@@ -115,6 +116,7 @@ public class MyGame extends Game implements ApplicationListener {
     @Override
     public void create() {
         AbstractScreen.game = this;
+        //Locale locale = new Locale("uk", "UK", "VAR1"); // for testing locale
         myBundle =       I18NBundle.createBundle(Gdx.files.internal("i18n/MyBundle"));
         background =     new Texture("fon24.jpg");
         blackGradient =  new Texture("black_gradient.png");

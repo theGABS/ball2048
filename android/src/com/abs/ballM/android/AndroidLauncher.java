@@ -3,6 +3,7 @@ package com.abs.ballM.android;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -47,6 +48,8 @@ public class AndroidLauncher extends AndroidApplication implements MyGame.Reques
 
 	@Override
 	protected void onCreate (Bundle savedInstanceState) {
+
+		int a = Build.VERSION_CODES.LOLLIPOP;
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
